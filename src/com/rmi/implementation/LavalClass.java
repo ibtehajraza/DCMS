@@ -6,7 +6,7 @@ import java.util.Date;
 
 import com.rmi.common.CenterServer;
 
-public class MontrealClass extends UnicastRemoteObject implements CenterServer {
+public class LavalClass extends UnicastRemoteObject implements CenterServer {
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 	private static final long serialVersionUID = 471941797268559074L;
 
 	// Default constructor.
-	public MontrealClass() throws RemoteException {
+	public LavalClass() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -24,7 +24,7 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 			String location) throws RemoteException {
 		// TODO Auto-generated method stub
 
-		System.out.println("Hi I am going to create a teacher record for you In Montreal.");
+		System.out.println("Hi I am going to create a teacher record for you In Laval.");
 		return true;
 	}
 
