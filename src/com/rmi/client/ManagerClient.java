@@ -86,8 +86,10 @@ public class ManagerClient {
 
 			CenterServer obj = (CenterServer) registry.lookup("CenterServer");
 
-			boolean status = obj.createTRecord(firstName, lastName, address, phoneNumber, specialization, location);
+			boolean status = obj.createTRecord(username, firstName, lastName, address, phoneNumber, specialization, location);
 
+			obj.findItem(username, specialization);
+			
 			System.out.println("Create Teacher's Record Created status: " + status);
 
 			managerActions(username);
