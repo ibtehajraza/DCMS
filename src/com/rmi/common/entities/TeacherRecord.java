@@ -5,11 +5,13 @@ package com.rmi.common.entities;
 
 import java.io.Serializable;
 
+import com.rmi.common.Records;
+
 /**
  * @author ibtehajraza
  *
  */
-public class TeacherRecord extends Record implements Serializable {
+public class TeacherRecord extends Records implements Serializable {
 
 	/**
 	 * Generated a serial version to maintain the integrity of the de-serialized

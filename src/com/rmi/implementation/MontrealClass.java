@@ -7,25 +7,52 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.rmi.common.CenterServer;
+import com.rmi.common.Records;
+import com.rmi.common.entities.TeacherRecord;
 
 public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 471941797268559074L;
 
 	private int serverPortMTL = 6666;
 	private int serverPortLVL = 8888;
 	private int serverPortDDO = 7777;
+	
+	ConcurrentHashMap<String, List<Records>> montrealRecords;
+	
 
 	// Default constructor.
 	public MontrealClass() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
+		
+		// Creating some seed records.
+		
+		this.montrealRecords = new ConcurrentHashMap<String, List<Records> >();
+		
+		List<Records> records = new ArrayList<>();
+		
+		Records teacherRecord = new Records();
+		
+		teacherRecord.setId("TR10000");
+		teacherRecord.setFirstName("Ali");
+		teacherRecord.setLastName("Ajmal");
+		teacherRecord.setAddress("355 rue de la montag");
+		teacherRecord.setPhone("090078601");
+		teacherRecord.setSpecialization("French");
+		teacherRecord.setLocation("mtl");
+		
+		records.add(teacherRecord);
+		
+		
+		
 	}
 
 	@Override

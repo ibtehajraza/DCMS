@@ -7,11 +7,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.rmi.common.Records;
+
 /**
  * @author ibtehajraza
  *
  */
-public class StudentRecord extends Record implements Serializable {
+public class StudentRecord extends Records implements Serializable {
 
 	/**
 	 * Generated a serial version to maintain the integrity of the de-serialized

@@ -88,9 +88,9 @@ public class ManagerClient {
 
 			boolean status = obj.createTRecord(username, firstName, lastName, address, phoneNumber, specialization, location);
 
-			obj.findItem(username, specialization);
+//			obj.findItem(username, specialization);
 			
-			System.out.println("Create Teacher's Record Created status: " + status);
+			//System.out.println("Create Teacher's Record Created status: " + status);
 
 			managerActions(username);
 
