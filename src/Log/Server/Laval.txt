@@ -1,0 +1,2 @@
+2021-06-10 08:29:57 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 08:29:57 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2

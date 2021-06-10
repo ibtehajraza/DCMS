@@ -1,0 +1,37 @@
+DATE: 2021-06-09 05:37:11 PMAction: getRecordCounts() | Parameters: Total number of records: 2 | Action Status: success | Resonse: Montreal Size: 2
+DATE: 2021-06-09 05:39:20 PMAction: getRecordCounts() | Parameters: Total number of records: 2 | Action Status: success | Resonse: Montreal Size: 2
+2021-06-09 05:41:55 PM: Action: getRecordCounts() | Parameters: Total number of records: 2 | Action Status: success | Resonse: Montreal Size: 2
+2021-06-09 06:45:43 PM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 08:14:07 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 08:18:03 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 08:18:04 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 08:19:29 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 08:19:29 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 08:22:44 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 08:22:44 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 08:29:41 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 08:29:41 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 11:22:18 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 11:22:18 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 11:23:45 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 11:23:45 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 11:25:00 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 11:25:01 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 11:25:22 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 11:25:22 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 11:25:29 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Montreal Size: 2
+2021-06-10 11:25:29 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 11:25:40 AM: Action: createTRecord() | args: [id: TR00002], [FirstName: WERWER], [LastName: WERWER], [Address: WERWERW], [phone:342342342], [specialization: ERWEFWEFWEFWF],[Location: RWERWER] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-10 11:39:07 AM: Action: createTRecord() | args: [id: TR00003], [FirstName: DFDWFDWFW], [LastName: DFDFDFEDF], [Address: DFDFGDD], [phone:23432423], [specialization: DWEFEFERF],[Location: DWF3] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-10 11:40:17 AM: Action: getRecordCounts() | args: Total number of records: 4 | Action Status: success | Response: Montreal Size: 4
+2021-06-10 11:40:18 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 11:40:30 AM: Action: getRecordCounts() | args: Total number of records: 4 | Action Status: success | Response: Montreal Size: 4
+2021-06-10 11:40:30 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 11:44:46 AM: Action: getRecordCounts() | args: Total number of records: 5 | Action Status: success | Response: Montreal Size: 5
+2021-06-10 11:44:46 AM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 01:07:35 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 02:35:53 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 02:37:05 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 02:37:05 PM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
+2021-06-10 02:38:11 PM: Action: createTRecord() | args: [id: TR00004], [FirstName: FJNJNF], [LastName: FDFSDFS], [Address: DWF2F], [phone:3423422], [specialization: WEWEWERWE],[Location: EWF2FE2] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-10 02:39:20 PM: Action: createSRecord() | args: [id: SR00002], [FirstName: FGDS], [LastName: SDFSDF], [status: false], [setStatusDate:Fri Feb 12 00:00:00 EST 2021], [courseRegistered: [Ljava.lang.Object;@3bee1683] | Action Status: Failure | Response: Teacher Record Added: false

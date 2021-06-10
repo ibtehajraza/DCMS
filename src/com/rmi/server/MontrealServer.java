@@ -60,21 +60,36 @@ public class MontrealServer {
 				
 				String sentence = new String( request.getData(), 0,
 						request.getLength() );
-				
-//				String[] parts = sentence.split(";");
-//				String function = parts[0];
-//				String userID = parts[1];
-//				String itemName = parts[2];
+
+				String[] parts = sentence.split(";");
+				String function = parts[0];
+				String userID = parts[1];
+				//String itemName = parts[2];
 //				String itemId = parts[3];
-				
-				System.out.println("Found something in MONTREAL");
+
 				System.out.println(sentence);
+
+				switch (function) {
 				
-				sendingResult= "this si a response;";
+				case "GetRecordCount":
+
+					System.out.println("Found something in Montreal");
+					sendingResult = String.valueOf(stub.getRecordCounts(userID));
+					
+					break;
+
+				default:
+					sendingResult = "0";
+					break;
+				}
+				
+				//sendingResult= "this si a response;";
 				
 				byte[] sendData = sendingResult.getBytes();
+				
 				DatagramPacket reply = new DatagramPacket(sendData, sendingResult.length(), request.getAddress(),
 						request.getPort());
+				
 				aSocket.send(reply);
 			}
 			
