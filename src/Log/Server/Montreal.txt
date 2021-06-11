@@ -35,3 +35,25 @@ DATE: 2021-06-09 05:39:20 PMAction: getRecordCounts() | Parameters: Total number
 2021-06-10 02:37:05 PM: Action: getRecordCounts() | args: Total number of records: 2 | Action Status: success | Response: Laval Size: 2
 2021-06-10 02:38:11 PM: Action: createTRecord() | args: [id: TR00004], [FirstName: FJNJNF], [LastName: FDFSDFS], [Address: DWF2F], [phone:3423422], [specialization: WEWEWERWE],[Location: EWF2FE2] | Action Status: Success | Response: Teacher Record Added: true
 2021-06-10 02:39:20 PM: Action: createSRecord() | args: [id: SR00002], [FirstName: FGDS], [LastName: SDFSDF], [status: false], [setStatusDate:Fri Feb 12 00:00:00 EST 2021], [courseRegistered: [Ljava.lang.Object;@3bee1683] | Action Status: Failure | Response: Teacher Record Added: false
+2021-06-10 03:35:41 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 03:54:26 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 04:03:40 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 04:10:55 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 04:16:04 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 04:16:04 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Laval count: 3
+2021-06-10 04:16:04 PM: Action: getRecordCounts() | args: Total number of records: 5 | Action Status: success | Response: DDO count: 5
+2021-06-10 04:16:32 PM: Action: createTRecord() | args: [id: TR00006], [FirstName: MTLTEACHER1], [LastName: LASTSNAME1], [Address: ADDRESS232], [phone:3243242], [specialization: ERQERQRWE],[Location: FDSF23R2] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-11 08:47:09 AM: Action: createTRecord() | args: [id: TR00009], [FirstName: AFFEWEFWE], [LastName: FEFWEFWEF], [Address: EWEFWEF], [phone:234234234], [specialization: FWEFWEFWEF],[Location: 34234] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-11 09:30:52 AM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-11 09:30:52 AM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Laval count: 3
+2021-06-11 09:30:52 AM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: DDO count: 3
+2021-06-11 09:31:06 AM: Action: createTRecord() | args: [id: TR00000], [FirstName: ERWERWERWE], [LastName: EWREWRWEEWR], [Address: WERWEREW], [phone:3423423], [specialization: WERWERWER],[Location: REWRWERWE] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-11 09:31:53 AM: Action: createTRecord() | args: [id: TR00001], [FirstName: RWERWER], [LastName: ERWERWE], [Address: REWREWR], [phone:32414324], [specialization: FEWWGWGW],[Location: EWRERWER] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-11 09:35:09 AM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-11 09:35:09 AM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Laval count: 3
+2021-06-11 09:35:09 AM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: DDO count: 3
+2021-06-11 09:35:21 AM: Action: createTRecord() | args: [id: TR00003], [FirstName: RQRQRQWRE], [LastName: WQRQWRQWRQWRQW], [Address: RQWRQWRQW], [phone:2434134], [specialization: FQFQFQWQW],[Location: RWQRWQRQWR] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-11 09:35:45 AM: Action: createSRecord() | args: [id: SR00000], [FirstName: STUDENT 1], [LastName: E3RERQ], [status: true], [setStatusDate: Fri Feb 12 00:00:00 EST 2021], [courseRegistered: MATH ENGLISH ] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-11 06:06:32 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-11 06:06:32 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Laval count: 3
+2021-06-11 06:06:32 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: DDO count: 3

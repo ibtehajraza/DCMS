@@ -7,6 +7,7 @@ import java.net.SocketException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import com.rmi.implementation.DDOClass;
 import com.rmi.implementation.LavalClass;
 import com.rmi.implementation.MontrealClass;
 
@@ -73,6 +74,18 @@ public class LavalServer {
 					
 					break;
 
+				case "getTeacherID":
+
+					sendingResult = String.valueOf(LavalClass.teacherCount);
+
+					break;
+				
+				case "getStudentID":
+					
+					sendingResult = String.valueOf(LavalClass.studentCount);
+					
+					break;
+					
 				default:
 					sendingResult = "0";
 					break;

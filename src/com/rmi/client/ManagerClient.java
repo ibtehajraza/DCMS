@@ -76,6 +76,8 @@ public class ManagerClient {
 		try {
 			Registry registry = LocateRegistry.getRegistry(serverPort);
 
+			createLog(username, "Start Session ", "Session Started successfully");
+			
 			System.out.println("\n\n .:: Main Menu ::. ");
 			
 			System.out.println("\n 1. Create Teacher's Record \n " + "2. Create Student Record \n "
@@ -175,12 +177,17 @@ public class ManagerClient {
 					"\n\nFirstName: %s, LastName: %s, address: %s, location: %s, phone: %s, Specialization: %s",
 					firstName, lastName, address, location, phoneNumber, specialization));
 
-			// obj = (CenterServer) registry.lookup("CenterServer");
+			createLog(username, "createTeacherRecord ", String.format(
+					"\n\nFirstName: %s, LastName: %s, address: %s, location: %s, phone: %s, Specialization: %s",
+					firstName, lastName, address, location, phoneNumber, specialization));
 
 			status = obj.createTRecord(username, firstName, lastName, address, phoneNumber, specialization, location);
 
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.out.println("[Error: "+e.getLocalizedMessage()+"");
+			
+		} catch (IOException e) {
+			System.out.println("Unable to create logs");
 		}
 
 		return status;
@@ -196,8 +203,8 @@ public class ManagerClient {
 
 		String courseArr[] = courses.split(",");
 
-		System.out.println("courseArr != null && courseArr.length > 0: " + (courseArr != null && courseArr.length > 0));
-		System.out.println("courseArr.length: " + courseArr.length);
+		//System.out.println("courseArr != null && courseArr.length > 0: " + (courseArr != null && courseArr.length > 0));
+		//System.out.println("courseArr.length: " + courseArr.length);
 
 		// Looping for the courses till we get the valid values.
 
@@ -243,6 +250,9 @@ public class ManagerClient {
 					.println(String.format("\n\nFirstName: %s, LastName: %s, Courses: [%s], Status: %s, statusDate: %s",
 							firstName, lastName, courses, status, statusDate));
 
+			createLog(username, "createStudentRecord ", String.format("\n\nFirstName: %s, LastName: %s, Courses: [%s], Status: %s, statusDate: %s",
+					firstName, lastName, courses, status, statusDate));
+			
 //			CenterServer obj = (CenterServer) registry.lookup("CenterServer");
 
 			result = obj.createSRecord(username, firstName, lastName, courseList,
@@ -527,7 +537,7 @@ public class ManagerClient {
 
 		try {
 
-			isValid = Pattern.matches("[MTLVOD]{3}[0-9]{5}", id); // This will check if the format is correct or not
+			isValid = Pattern.matches("[MTLVOD]{3}[0-9]{4}", id); // This will check if the format is correct or not
 
 			if (isValid) {
 

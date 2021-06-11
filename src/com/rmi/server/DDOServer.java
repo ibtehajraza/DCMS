@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.rmi.server;
 
 import java.io.IOException;
@@ -10,24 +7,23 @@ import java.net.SocketException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import com.rmi.implementation.DDOClass;
 import com.rmi.implementation.LavalClass;
 import com.rmi.implementation.MontrealClass;
 
-public class MontrealServer {
-
-	// Registering this server on the registry
+public class DDOServer {
 
 	public static void main(String args[]) {
 
 		try {
 
-			MontrealClass stub = new MontrealClass();
+			DDOClass stub = new DDOClass();
 
-			Registry registry = LocateRegistry.createRegistry(2965);
+			Registry registry = LocateRegistry.createRegistry(2966);
 
 			registry.bind("CenterServer", stub);
 
-			System.out.println("Montral Server is up.");
+			System.out.println("DDO Server is up.");
 
 			Runnable task = () -> {
 				receive(stub);
@@ -41,18 +37,18 @@ public class MontrealServer {
 
 	}
 
-	private static void receive(MontrealClass stub) {
+	private static void receive(DDOClass stub) {
 
 		DatagramSocket aSocket = null;
 		String sendingResult = "";
 
 		try {
 
-			aSocket = new DatagramSocket(6666);
+			aSocket = new DatagramSocket(7777);
 
 			byte[] buffer = new byte[1000];
 
-			System.out.println("Montreal UDP Server 6666 Started............");
+			System.out.println("DDO UDP Server 7777 Started............");
 
 			while (true) {
 
@@ -65,29 +61,31 @@ public class MontrealServer {
 				String[] parts = sentence.split(";");
 				String function = parts[0];
 				String userID = parts[1];
-				// String itemName = parts[2];
+				//String itemName = parts[2];
 //				String itemId = parts[3];
 
 				System.out.println(sentence);
 
 				switch (function) {
-
 				case "GetRecordCount":
 
-					System.out.println("Found something in Montreal");
+					System.out.println("Requesting a RecordCount");
+					
 					sendingResult = String.valueOf(stub.getRecordCounts(userID));
-
+					
 					break;
-
+					
 				case "getTeacherID":
 
-					sendingResult = String.valueOf(MontrealClass.teacherCount);
+					System.out.println("Requesting TeacherID");
+
+					sendingResult = String.valueOf(DDOClass.teacherCount);
 
 					break;
 				
 				case "getStudentID":
 					
-					sendingResult = String.valueOf(MontrealClass.studentCount);
+					sendingResult = String.valueOf(DDOClass.studentCount);
 					
 					break;
 
@@ -95,14 +93,13 @@ public class MontrealServer {
 					sendingResult = "0";
 					break;
 				}
+				
 
-				// sendingResult= "this si a response;";
+				//sendingResult = "this si a response;";
 
 				byte[] sendData = sendingResult.getBytes();
-
 				DatagramPacket reply = new DatagramPacket(sendData, sendingResult.length(), request.getAddress(),
 						request.getPort());
-
 				aSocket.send(reply);
 			}
 

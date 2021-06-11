@@ -1,0 +1,14 @@
+2021-06-10 04:14:48 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 04:14:48 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Laval count: 3
+2021-06-10 04:14:48 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: DDO count: 3
+2021-06-10 04:15:14 PM: Action: createTRecord() | args: [id: TR00005], [FirstName: DDO1], [LastName: DD11], [Address: ADDRESS1], [phone:2039209], [specialization: MATHS],[Location: LOCATION1] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-10 04:15:18 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 04:15:18 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Laval count: 3
+2021-06-10 04:15:18 PM: Action: getRecordCounts() | args: Total number of records: 4 | Action Status: success | Response: DDO count: 4
+2021-06-10 04:15:46 PM: Action: createSRecord() | args: [id: SR00003], [FirstName: STUDNET1], [LastName: LASTNAEM1], [status: true], [setStatusDate:Wed May 12 00:00:00 EDT 2021], [courseRegistered: [Ljava.lang.Object;@526e9e7d] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-10 04:15:48 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Montreal Size: 3
+2021-06-10 04:15:48 PM: Action: getRecordCounts() | args: Total number of records: 3 | Action Status: success | Response: Laval count: 3
+2021-06-10 04:15:48 PM: Action: getRecordCounts() | args: Total number of records: 5 | Action Status: success | Response: DDO count: 5
+2021-06-11 08:44:46 AM: Action: createTRecord() | args: [id: TR00007], [FirstName: FSDFSD], [LastName: FSDF], [Address: SDFSDF], [phone:24323423], [specialization: ERRWERWER],[Location: DFSFDS] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-11 08:45:49 AM: Action: createTRecord() | args: [id: TR00008], [FirstName: FDSFA], [LastName: DFDFSDF], [Address: FDFDSFSDF], [phone:3423423], [specialization: FFWEFWE],[Location: FDFWEF] | Action Status: Success | Response: Teacher Record Added: true
+2021-06-11 09:04:36 AM: Action: createTRecord() | args: [id: TR00012], [FirstName: FDFDSF], [LastName: DFDFADA], [Address: FADFDF], [phone:343424214], [specialization: FWEFWEFWEF],[Location: DFADFAD] | Action Status: Success | Response: Teacher Record Added: true

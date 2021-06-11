@@ -22,7 +22,7 @@ import com.rmi.common.CenterServer;
 import com.rmi.common.IDGenerator;
 import com.rmi.common.Records;
 
-public class LavalClass extends UnicastRemoteObject implements CenterServer {
+public class DDOClass extends UnicastRemoteObject implements CenterServer {
 
 	/**
 	 * 
@@ -31,61 +31,61 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 
 	public static int teacherCount = 0;
 	public static int studentCount = 0;
-	
+
 	private int serverPortMTL = 6666;
 	private int serverPortLVL = 8888;
 	private int serverPortDDO = 7777;
 	
-	ConcurrentHashMap<String, List<Records>> lavalRecords;
+	ConcurrentHashMap<String, List<Records>> ddoRecords;
 	
 	
 	// Default constructor.
-	public LavalClass() throws RemoteException {
+	public DDOClass() throws RemoteException {
 		super();
 		
-		this.lavalRecords = new ConcurrentHashMap<String, List<Records>>();
+		this.ddoRecords = new ConcurrentHashMap<String, List<Records>>();
 
 		List<Records> records = new ArrayList<Records>();
 
 		Records teacherRecord = new Records();
 
-		teacherRecord.setId("TR50000");
-		teacherRecord.setFirstName("John");
-		teacherRecord.setLastName("Snow");
-		teacherRecord.setAddress("340 rue de la montag");
-		teacherRecord.setPhone("090078609");
+		teacherRecord.setId("TR60000");
+		teacherRecord.setFirstName("Angila");
+		teacherRecord.setLastName("Beans");
+		teacherRecord.setAddress("322 rue de la montag");
+		teacherRecord.setPhone("090078610");
 		teacherRecord.setSpecialization("French");
-		teacherRecord.setLocation("lvl");
+		teacherRecord.setLocation("ddo");
 
 		records.add(teacherRecord);
 		teacherCount++;
+
 		teacherRecord = new Records();
 
-		teacherRecord.setId("TR50001");
-		teacherRecord.setFirstName("Hunter");
-		teacherRecord.setLastName("Kal");
-		teacherRecord.setAddress("340 rue de la montag");
-		teacherRecord.setPhone("090078607");
+		teacherRecord.setId("TR60001");
+		teacherRecord.setFirstName("Michal");
+		teacherRecord.setLastName("Scoot");
+		teacherRecord.setAddress("321 rue de la montag");
+		teacherRecord.setPhone("090078611");
 		teacherRecord.setSpecialization("Math");
-		teacherRecord.setLocation("lvl");
+		teacherRecord.setLocation("ddo");
 
 		records.add(teacherRecord);
 		teacherCount++;
 		
 		teacherRecord = new Records();
 
-		teacherRecord.setId("TR50003");
-		teacherRecord.setFirstName("Kali");
-		teacherRecord.setLastName("Kappor");
-		teacherRecord.setAddress("341 rue de la montag");
-		teacherRecord.setPhone("090078608");
-		teacherRecord.setSpecialization("Math-1");
-		teacherRecord.setLocation("lvl");
+		teacherRecord.setId("TR60003");
+		teacherRecord.setFirstName("Jim");
+		teacherRecord.setLastName("Hallpert");
+		teacherRecord.setAddress("322 rue de la montag");
+		teacherRecord.setPhone("090078612");
+		teacherRecord.setSpecialization("Science");
+		teacherRecord.setLocation("ddo");
 
 		records.add(teacherRecord);
-
 		teacherCount++;
-		
+
 		addListToHashmap(records);
 		
 	}
@@ -106,7 +106,7 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 		}
 
 		String id = new IDGenerator().getId(false, idCount);
-
+		
 		teacherRecord.setId(id);
 		teacherRecord.setFirstName(firstName);
 		teacherRecord.setLastName(lastName);
@@ -116,11 +116,11 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 		teacherRecord.setLocation(location);
 
 		boolean status = addItemToHashmap(teacherRecord);
-
+		
 		if(status) {
 			teacherCount++;
 		}
-		
+
 		try {
 
 			serverLogCreate(managerID, method, "Teacher Record Added: " + status, status ? "Success" : "Failure",
@@ -132,7 +132,7 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 			System.out.println("\n\nUnable to add logging for edit record.");
 		}
 
-		System.out.println("create a teacher record in Laval center. Status: " + status);
+		System.out.println("create a teacher record in DDO center. Status: " + status);
 
 		return status;
 	}
@@ -168,13 +168,13 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 		}
 		
 		try {
-
+			
 			String courses = "";
-
-			for (String course : courseRegistered) {
+			
+			for(String course : courseRegistered) {
 				courses += course + " ";
 			}
-			
+
 			serverLogCreate(managerID, method, "Student Record Added: " + status, status ? "Success" : "Failure",
 					String.format(
 							"[id: %s], [FirstName: %s], [LastName: %s], [status: %s], [setStatusDate: %s], [courseRegistered: %s]",
@@ -184,7 +184,7 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 			System.out.println("\n\nUnable to add logging for edit record.");
 		}
 
-		System.out.println("created a student record in Laval center. Status: " + status);
+		System.out.println("created a student record in DDO center. Status: " + status);
 		
 		return result;
 	}
@@ -192,18 +192,18 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 	@Override
 	public int getRecordCounts(String managerID) throws RemoteException {
 
-		System.out.println("\nReturning Record Count for Laval Server\n\n");
+		System.out.println("\nReturning Record Count for DDO Server\n\n");
 
 		int count = 0;
 
 		try {
-			for (List<Records> val : lavalRecords.values())
+			for (List<Records> val : ddoRecords.values())
 				count += val.size();
 
-			serverLogCreate(managerID, "getRecordCounts()", "Laval count: " + count, "success",
+			serverLogCreate(managerID, "getRecordCounts()", "DDO count: " + count, "success",
 					"Total number of records: " + count);
 
-			System.out.println("\nRecord Count for Laval Server is ["+ count +"]\n\n");
+			System.out.println("\nRecord Count for DDO Server is ["+ count +"]\n\n");
 
 		} catch (Exception e) {
 
@@ -218,25 +218,25 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 
 		String itemList = "No items are available";
 
-		//System.out.println("Starting FindItem Laval for function: " + functionName);
+		//System.out.println("Starting FindItem DDO for function: " + functionName);
 
 		String serverPrefix = managerID.substring(0, Math.min(managerID.length(), 3)).toUpperCase();
 
 		System.out.println(serverPrefix);
 
-		if (serverPrefix.equals("LVL")) {
+		if (serverPrefix.equals("DDO")) {
 
 			if (functionName.equalsIgnoreCase("GetRecordCount")) {
 				String resultMTL = sendMessage(serverPortMTL, functionName, managerID);
-				String resultDDO = sendMessage(serverPortDDO, functionName, managerID);
-				int resultLVL = getRecordCounts(managerID);
+				String resultLVL = sendMessage(serverPortLVL, functionName, managerID);
+				int resultDDO = getRecordCounts(managerID);
 				itemList = "MTL: " + resultMTL + ", LVL: " + resultLVL + ", DDO: " + resultDDO;
 			}
 			
 			if(functionName.equalsIgnoreCase("getTeacherID")) {
 				
 				String resultMTL = sendMessage(serverPortMTL, functionName, managerID);
-				String resultDDO = sendMessage(serverPortDDO, functionName, managerID);
+				String resultLVL = sendMessage(serverPortLVL, functionName, managerID);
 				
 					
 				int mtlCount;
@@ -246,16 +246,16 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 					mtlCount = 0;
 				}
 				
-				int ddoCount;
+				int lvlCount;
 				try {
-					ddoCount = Integer.parseInt(resultDDO.trim());
+					lvlCount = Integer.parseInt(resultLVL.trim());
 				} catch (NumberFormatException e) {
-					ddoCount = 0;
+					lvlCount = 0;
 				}
 				
-				System.out.println(mtlCount+", "+ ddoCount);
+				System.out.println(mtlCount+", "+ lvlCount);
 				
-				int sum = ddoCount + mtlCount + LavalClass.teacherCount;
+				int sum = lvlCount + mtlCount + DDOClass.teacherCount;
 				
 				itemList = String.valueOf(sum);
 				
@@ -264,7 +264,7 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 			if(functionName.equalsIgnoreCase("getStudentID")) {
 				
 				String resultMTL = sendMessage(serverPortMTL, functionName, managerID);
-				String resultDDO = sendMessage(serverPortDDO, functionName, managerID);
+				String resultLVL = sendMessage(serverPortLVL, functionName, managerID);
 				
 					
 				int mtlCount;
@@ -274,16 +274,16 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 					mtlCount = 0;
 				}
 				
-				int ddoCount;
+				int lvlCount;
 				try {
-					ddoCount = Integer.parseInt(resultDDO.trim());
+					lvlCount = Integer.parseInt(resultLVL.trim());
 				} catch (NumberFormatException e) {
-					ddoCount = 0;
+					lvlCount = 0;
 				}
 				
-				System.out.println(mtlCount+", "+ ddoCount);
+				System.out.println(mtlCount+", "+ lvlCount);
 				
-				int sum = ddoCount + mtlCount + LavalClass.studentCount;
+				int sum = lvlCount + mtlCount + DDOClass.studentCount;
 				
 				itemList = String.valueOf(sum);
 				
@@ -299,13 +299,13 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 
 		boolean status = false;
 		
-		System.out.println("I will edit the record for you.");
+		//System.out.println("I will edit the record for you.");
 
 		System.out.println(recordId + " " + fieldName + " " + newValue);
 
 		// boolean val = montrealRecords.editRecord(recordId, fieldName, newValue);
 
-		for (List<Records> val : lavalRecords.values()) {
+		for (List<Records> val : ddoRecords.values()) {
 
 			for (int i = 0; i < val.size(); i++) {
 
@@ -443,10 +443,10 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 
 				String key = String.valueOf(record.getLastName().charAt(0));
 
-				if (lavalRecords.containsKey(key)) {
+				if (ddoRecords.containsKey(key)) {
 
 					// Updating the list
-					lavalRecords.get(key).add(record);
+					ddoRecords.get(key).add(record);
 
 				} else {
 
@@ -456,7 +456,7 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 					list.add(record);
 
 					// Creating a new entry in the hashmap
-					lavalRecords.put(key, list);
+					ddoRecords.put(key, list);
 				}
 
 			}
@@ -472,10 +472,10 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 
 			String key = String.valueOf(record.getLastName().charAt(0));
 
-			if (lavalRecords.containsKey(key)) {
+			if (ddoRecords.containsKey(key)) {
 
 				// Updating the list
-				lavalRecords.get(key).add(record);
+				ddoRecords.get(key).add(record);
 
 				status = true;
 
@@ -487,7 +487,7 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 				list.add(record);
 
 				// Creating a new entry in the hashmap
-				lavalRecords.put(key, list);
+				ddoRecords.put(key, list);
 
 				status = true;
 			}
@@ -501,9 +501,9 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 		
 		DatagramSocket aSocket = null;
 		String result ="";
-		String dataFromClient = function+";"+userID /*+ ";"+itemName+";"+itemId*/;
+		String dataFromClient = function+";"+userID ;
 		
-		System.out.println(dataFromClient + ": LVL  ");
+		System.out.println(dataFromClient + ": DDO  ");
 		
 		try {
 		
@@ -531,9 +531,9 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 			
 			//e.printStackTrace();
 			System.out.println("IO: " + e.getMessage());
-		
-			result = e.getLocalizedMessage();
 			
+			result = e.getLocalizedMessage();
+		
 		} finally {
 		
 			if (aSocket != null)
@@ -596,7 +596,7 @@ public class LavalClass extends UnicastRemoteObject implements CenterServer {
 		} else if (serverPrefix.equalsIgnoreCase("DDO")) {
 			fileName = dir + "/src/Log/Server/Dollard_des_Ormeaux.txt";
 		}else {
-			fileName = dir + "/src/Log/Server/Laval.txt";			
+			fileName = dir + "/src/Log/Server/Dollard_des_Ormeaux.txt";
 		}
 
 		Date date = new Date();

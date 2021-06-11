@@ -7,6 +7,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.text.DateFormat;
@@ -27,6 +28,9 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 
 	private static final long serialVersionUID = 471941797268559074L;
 
+	public static int teacherCount = 0;
+	public static int studentCount = 0;
+	
 	private int serverPortMTL = 6666;
 	private int serverPortLVL = 8888;
 	private int serverPortDDO = 7777;
@@ -54,7 +58,8 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 		teacherRecord.setLocation("mtl");
 
 		records.add(teacherRecord);
-
+		teacherCount++;
+		
 		teacherRecord = new Records();
 
 		teacherRecord.setId("TR20000");
@@ -66,7 +71,8 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 		teacherRecord.setLocation("lvl");
 
 		records.add(teacherRecord);
-
+		teacherCount++;
+		
 		teacherRecord = new Records();
 
 		teacherRecord.setId("TR10001");
@@ -78,12 +84,13 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 		teacherRecord.setLocation("ddo");
 
 		records.add(teacherRecord);
-
+		teacherCount++;
+		
 		addListToHashmap(records);
 
 	}
 
-	static long longID = 10;
+	//static long longID = 10;
 
 	@Override
 	public boolean createTRecord(String managerID, String firstName, String lastName, String address, String phone,
@@ -93,8 +100,14 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 
 		Records teacherRecord = new Records();
 
-		//String id = String.format("TR%05d", longID);
-		String id = new IDGenerator().getId(false);
+		int idCount = 0 ;
+		try {
+			idCount = Integer.parseInt(findItem(managerID, "getTeacherID").trim());
+		} catch (NumberFormatException e1) {
+			System.out.println("Integer parssing error");
+		}
+
+		String id = new IDGenerator().getId(false, idCount);
 
 		teacherRecord.setId(id);
 		teacherRecord.setFirstName(firstName);
@@ -106,9 +119,11 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 
 		boolean status = addItemToHashmap(teacherRecord);
 
+		if(status) {
+			teacherCount++;
+		}
+		
 		try {
-
-			// createLog(managerID, method, "Add teacher record: " + status);
 
 			serverLogCreate(managerID, method, "Teacher Record Added: " + status, status ? "Success" : "Failure",
 					String.format(
@@ -116,10 +131,10 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 							id, firstName, lastName, address, phone, specialization, location));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("\n\nUnable to add logging for edit record.");
 		}
 
-		System.out.println("create a teacher record for you In Montreal Status: " + status);
+		System.out.println("create a teacher record in Montreal status: " + status);
 
 		return status;
 	}
@@ -132,31 +147,47 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 
 		Records studentRecord = new Records();
 
-		//String id = String.format("TR%05d", longID);
-		String id = new IDGenerator().getId(true);
-		
+		int idCount = 0 ;
+		try {
+			idCount = Integer.parseInt(findItem(managerID, "getStudentID").trim());
+		} catch (NumberFormatException e1) {
+			System.out.println("Integer parssing error");
+		}
+
+		String id = new IDGenerator().getId(true, idCount);
+
 		studentRecord.setId(id);
 		studentRecord.setFirstName(firstName);
 		studentRecord.setLastName(lastName);
 		studentRecord.setCoursesRegistered(courseRegistered);
 		studentRecord.setStatus(status);
 		studentRecord.setStatusDate(statusDate);
-		
+
 		boolean result = addItemToHashmap(studentRecord);
+
+		if(status) {
+			studentCount++;
+		}
 		
 		try {
 
-			serverLogCreate(managerID, method, "Teacher Record Added: " + status, status ? "Success" : "Failure",
+			String courses = "";
+
+			for (String course : courseRegistered) {
+				courses += course + " ";
+			}
+
+			serverLogCreate(managerID, method, "Student Record Added: " + status, status ? "Success" : "Failure",
 					String.format(
-							"[id: %s], [FirstName: %s], [LastName: %s], [status: %s], [setStatusDate:%s], [courseRegistered: %s]",
-							id, firstName, lastName, String.valueOf(status), statusDate.toString(), courseRegistered.toArray().toString()));
+							"[id: %s], [FirstName: %s], [LastName: %s], [status: %s], [setStatusDate: %s], [courseRegistered: %s]",
+							id, firstName, lastName, String.valueOf(status), statusDate.toString(), courses));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("\n\nUnable to add logging for edit record.");
 		}
 
-		System.out.println("created a teacher record in Montreal. Status: " + status);
-		
+		System.out.println("created a student record in Montreal center. Status: " + status);
+
 		return result;
 	}
 
@@ -174,7 +205,7 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 			serverLogCreate(managerID, "getRecordCounts()", "Montreal Size: " + count, "success",
 					"Total number of records: " + count);
 
-			System.out.println("\nRecord Count for Montreal Server is ["+ count +"]\n\n");
+			System.out.println("\nRecord Count for Montreal Server is [" + count + "]\n\n");
 
 		} catch (Exception e) {
 
@@ -189,7 +220,8 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 
 		String itemList = "No items are available";
 
-		//System.out.println("Starting FindItem Montreal for function: " + functionName);
+		// System.out.println("Starting FindItem Montreal for function: " +
+		// functionName);
 
 		String serverPrefix = managerID.substring(0, Math.min(managerID.length(), 3)).toUpperCase();
 
@@ -197,20 +229,69 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 
 		if (serverPrefix.equals("MTL")) {
 
-			// String resultDDO = sendMessage(ddoServerPort, "getID", userID, itemName,
-			// null);
-
-			int resultMTL = getRecordCounts(managerID);
-			String resultLVL = sendMessage(serverPortLVL, functionName, managerID);
-			// itemList = itemList + resultDDO + resultLVL;
-
-			System.out.println(resultMTL);
-			System.out.println(resultLVL);
-
-			// int count = resultMTL + Integer.parseInt(resultLVL);
-
-			itemList = "MTL: " + String.valueOf(resultMTL) + ", LVL: " + resultLVL ;
-
+			if (functionName.equalsIgnoreCase("GetRecordCount")) {
+				int resultMTL = getRecordCounts(managerID);
+				String resultLVL = sendMessage(serverPortLVL, functionName, managerID);
+				String resultDDO = sendMessage(serverPortDDO, functionName, managerID);
+				itemList = "MTL: " + String.valueOf(resultMTL) + ", LVL: " + resultLVL + ", DDO: " + resultDDO;
+			}
+			
+			if(functionName.equalsIgnoreCase("getTeacherID")) {
+				
+				String resultLVL = sendMessage(serverPortLVL, functionName, managerID);
+				String resultDDO = sendMessage(serverPortDDO, functionName, managerID);
+				
+					
+				int lvlCount;
+				try {
+					lvlCount = Integer.parseInt(resultLVL.trim());
+				} catch (NumberFormatException e) {
+					lvlCount = 0;
+				}
+				
+				int ddoCount;
+				try {
+					ddoCount = Integer.parseInt(resultDDO.trim());
+				} catch (NumberFormatException e) {
+					ddoCount = 0;
+				}
+				
+				System.out.println(lvlCount+", "+ ddoCount);
+				
+				int sum = ddoCount + lvlCount + MontrealClass.teacherCount;
+				
+				itemList = String.valueOf(sum);
+				
+			}
+			
+			if(functionName.equalsIgnoreCase("getStudentID")) {
+				
+				String resultLVL = sendMessage(serverPortLVL, functionName, managerID);
+				String resultDDO = sendMessage(serverPortDDO, functionName, managerID);
+				
+					
+				int lvlCount;
+				try {
+					lvlCount = Integer.parseInt(resultLVL.trim());
+				} catch (NumberFormatException e) {
+					lvlCount = 0;
+				}
+				
+				int ddoCount;
+				try {
+					ddoCount = Integer.parseInt(resultDDO.trim());
+				} catch (NumberFormatException e) {
+					ddoCount = 0;
+				}
+				
+				System.out.println(lvlCount+", "+ ddoCount);
+				
+				int sum = ddoCount + lvlCount + MontrealClass.studentCount;
+				
+				itemList = String.valueOf(sum);
+				
+			}
+			
 		}
 
 		return itemList;
@@ -220,7 +301,7 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 	public boolean editRecord(String recordId, String fieldName, String newValue) throws RemoteException {
 
 		boolean status = false;
-		
+
 		System.out.println("I will edit the record for you.");
 
 		System.out.println(recordId + " " + fieldName + " " + newValue);
@@ -232,42 +313,40 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 			for (int i = 0; i < val.size(); i++) {
 
 				if (val.get(i).getId().equals(recordId)) {
-					
-					
+
 					Records record = val.get(i);
-					
+
 					String recordType = record.getId().substring(0, 2);
-					
-					if(recordType.equalsIgnoreCase("TR")) {
-						
-						
+
+					if (recordType.equalsIgnoreCase("TR")) {
+
 						if (fieldName.equalsIgnoreCase("address")) {
-							
+
 							val.get(i).setAddress(newValue);
-							
+
 							status = true;
 						}
-						
+
 						if (fieldName.equalsIgnoreCase("phone")) {
-							
+
 							val.get(i).setPhone(newValue);
-							
+
 							status = true;
 						}
-						
+
 						if (fieldName.equalsIgnoreCase("location")) {
-							
+
 							switch (newValue.toLowerCase()) {
 							case "lvl":
-								
+
 							case "mtl":
-								
+
 							case "ddo":
 
-								val.get(i).setPhone(newValue.toLowerCase());								
-								
+								val.get(i).setPhone(newValue.toLowerCase());
+
 								status = true;
-								
+
 								break;
 
 							default:
@@ -275,83 +354,78 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 
 								break;
 							}
-							
-							
+
 						}
-						
-					}else if(recordType.equalsIgnoreCase("SR")) {
-						
+
+					} else if (recordType.equalsIgnoreCase("SR")) {
+
 						if (fieldName.equalsIgnoreCase("STATUS")) {
-							
+
 							try {
-								
+
 								val.get(i).setStatus(Boolean.valueOf(newValue));
-								
+
 								status = true;
-							
+
 							} catch (Exception e) {
 								System.out.println("Only boolean value is allowed.");
 							}
-							
+
 						}
-						
-						
+
 						if (fieldName.equalsIgnoreCase("COURSES")) {
-							
+
 							String courses[] = newValue.split(",");
-							
-							if(courses!= null && courses.length > 0) {
+
+							if (courses != null && courses.length > 0) {
 
 								List<String> registeredCourse = new ArrayList<String>();
-								for(String course : courses) {
+								for (String course : courses) {
 									registeredCourse.add(course);
 								}
-								
-								if(registeredCourse!= null && registeredCourse.size() > 0) {
+
+								if (registeredCourse != null && registeredCourse.size() > 0) {
 
 									val.get(i).setCoursesRegistered(registeredCourse);
-									
+
 									status = true;
 								}
-								
-							} //End of if(courses!= null && courses.length > 0)
-							
-						}	// End of fieldName.equals("COURSE")
+
+							} // End of if(courses!= null && courses.length > 0)
+
+						} // End of fieldName.equals("COURSE")
 
 						if (fieldName.equalsIgnoreCase("STATUSDATE")) {
-							
+
 							try {
-								
+
 								Date date = new SimpleDateFormat("dd/MM/yyyy").parse(newValue);
-								
+
 								val.get(i).setStatusDate(date);
-								
+
 								status = true;
-								
+
 							} catch (ParseException e) {
-								
+
 								System.out.println("Invalid date");
 							}
-							
-							
+
 						}
-						
-					}	// End of	recordType.equalsIgnoreCase("SR")
-					
+
+					} // End of recordType.equalsIgnoreCase("SR")
+
 				}
 			}
 		}
 
-		
 		try {
-			serverLogCreate(recordId, "EditRecord", (status)?"Success":"Failure",
-					("Result of edit:"  + status), 
-					String.format("[fieldName: %s, newValue: %s]", fieldName,newValue));
+			serverLogCreate(recordId, "EditRecord", (status) ? "Success" : "Failure", ("Result of edit:" + status),
+					String.format("[fieldName: %s, newValue: %s]", fieldName, newValue));
 		} catch (IOException e) {
 
 			System.out.println("\n\nUnable to add logging for edit record.");
 		}
-		
+
 		System.out.println("Result of edit: " + status);
 
 		return status;
@@ -419,12 +493,11 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 		return status;
 	}
 
-	private static String sendMessage(int serverPort, String function,
-			String userID/* , String itemName, String itemId */) {
+	private static String sendMessage(int serverPort, String function, String userID) {
 
 		DatagramSocket aSocket = null;
 		String result = "";
-		String dataFromClient = function + ";" + userID /* + ";" + itemName + ";" + itemId */;
+		String dataFromClient = function + ";" + userID;
 
 		System.out.println(dataFromClient + ": MTL  ");
 
@@ -434,6 +507,9 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 			byte[] message = dataFromClient.getBytes();
 			InetAddress aHost = InetAddress.getByName("localhost");
 			DatagramPacket request = new DatagramPacket(message, dataFromClient.length(), aHost, serverPort);
+
+			aSocket.setSoTimeout(10000);
+
 			aSocket.send(request);
 
 			byte[] buffer = new byte[1000];
@@ -446,12 +522,19 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 
 		} catch (SocketException e) {
 
-			System.out.println("Socket: " + e.getMessage());
+			System.out.println("Socket: " + e.getLocalizedMessage());
 
 		} catch (IOException e) {
 
-			e.printStackTrace();
-			System.out.println("IO: " + e.getMessage());
+			// e.printStackTrace();
+			System.out.println("IO: " + e.getLocalizedMessage());
+
+			result = e.getLocalizedMessage();
+
+		} catch (Exception e) {
+
+			// e.printStackTrace();
+			System.out.println("Exception " + e.getLocalizedMessage());
 
 		} finally {
 
@@ -512,8 +595,8 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 
 		} else if (serverPrefix.equalsIgnoreCase("DDO")) {
 			fileName = dir + "/src/Log/Server/Dollard_des_Ormeaux.txt";
-		}else {
-			fileName = dir + "/src/Log/Server/Montreal.txt";			
+		} else {
+			fileName = dir + "/src/Log/Server/Montreal.txt";
 		}
 
 		Date date = new Date();
@@ -542,5 +625,5 @@ public class MontrealClass extends UnicastRemoteObject implements CenterServer {
 //	    }
 //	    return false;
 //	}
-	
+
 }
